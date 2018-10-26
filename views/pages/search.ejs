@@ -1,77 +1,93 @@
 <div class="search">
 
-  <div class="row">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-12">
-          <nav>
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 search-item">
+  <form action="/search" method="get" id="searchForm">
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
           <div class="col-md-12">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539941826904&di=ca0d4fe10c5fded15c1a34a3569dccd4&imgtype=0&src=http%3A%2F%2Fm2.biz.itc.cn%2Fpic%2Fnew%2Fn%2F45%2F59%2FImg7375945_n.jpg" />
-            <h5>Culture and Politics in European Cinema</h5>
-            <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+            <% const current = parseInt(req.query.page) || 1; %>
+
+            <nav>
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="/search?eventName=<%=condition.eventName%>&organizer=<%=condition.organizer%>&startDate=<%=condition.startDateStr%>&endDate=<%=condition.endDateStr%>&venue=<%=condition.venue%>&page=<%=Math.max(current-1, 1)%>">Previous</a></li>
+
+                <% for (let i = 1; i <= count; i++) { %>
+                  <li class="page-item">
+                    <a class="page-link" href="/search?eventName=<%=condition.eventName%>&organizer=<%=condition.organizer%>&startDate=<%=condition.startDateStr%>&endDate=<%=condition.endDateStr%>&venue=<%=condition.venue%>&page=<%=i%>"><%=i%></a>
+                  </li>
+                <% } %>
+
+                <li class="page-item"><a class="page-link" href="/search?eventName=<%=condition.eventName%>&organizer=<%=condition.organizer%>&startDate=<%=condition.startDateStr%>&endDate=<%=condition.endDateStr%>&venue=<%=condition.venue%>&page=<%=Math.min(current+1, count)%>">Next</a></li>
+              </ul>
+            </nav>
+
           </div>
         </div>
-        <div class="col-md-6 search-item">
-          <div class="col-md-12">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539941826904&di=ca0d4fe10c5fded15c1a34a3569dccd4&imgtype=0&src=http%3A%2F%2Fm2.biz.itc.cn%2Fpic%2Fnew%2Fn%2F45%2F59%2FImg7375945_n.jpg" />
-            <h5>Culture and Politics in European Cinema</h5>
-            <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+
+        <div class="row">
+          <% events.forEach(function (event) { %>
+            <div class="col-md-6 search-item">
+              <div class="col-md-12">
+                <img src="<%= event.imageURL %>" />
+                <h5><a href="/detail/<%= event.id %>"><%= event.eventName %></a></h5>
+                <p><%= event.shortDesc %></p>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+
+      </div>
+
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="inputEventName">Event Name:</label>
+          <input type="text" class="form-control" id="inputEventName" name="eventName">
+        </div>
+        <div class="form-group">
+          <label for="selectOrganizer">Organizer:</label>
+          <select class="form-control custom-select" id="selectOrganizer" name="organizer">
+            <option value="" disabled selected>Please pick one</option>
+            <% allOption.allOrganizers.forEach(function(organizer){ %>
+              <option><%= organizer %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputStartDate">Start Date:</label>
+          <div class="input-startDate date">
+            <input type="text" class="form-control" id="inputStartDate" name="startDate"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
           </div>
         </div>
+        <div class="form-group">
+          <label for="inputEndDate">End Date:</label>
+          <div class="input-endDate date">
+            <input type="text" class="form-control" id="inputEndDate" name="endDate"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="selectVenue">Venue:</label>
+          <select class="form-control custom-select" id="selectVenue" name="venue">
+            <option value="" disabled selected>Please pick one</option>
+            <% allOption.allVenue.forEach(function(venue){ %>
+              <option><%= venue %></option>
+            <% }); %>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="search-submit">Submit</button>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="inputEventName">Event Name:</label>
-        <input type="text" class="form-control" id="inputEventName">
-      </div>
-      <div class="form-group">
-        <label for="selectOrganizer">Organizer:</label>
-        <select class="form-control" id="selectOrganizer">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="inputStartDate">Start Date:</label>
-        <input type="text" class="form-control" id="inputStartDate">
-      </div>
-      <div class="form-group">
-        <label for="inputEndDate">End Date:</label>
-        <input type="text" class="form-control" id="inputEndDate">
-      </div>
-      <div class="form-group">
-        <label for="selectVenue">Venue:</label>
-        <select class="form-control" id="selectVenue">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </div>
+
+  </form>
 
 </div>
 
 <style>
+
+  .page-link{
+    display: inline;
+  }
 
   .search{
     margin-top: 3%;
@@ -98,3 +114,54 @@
   }
 
 </style>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+
+  $('.input-startDate.date').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-0d'
+  });
+
+  $('.input-endDate.date').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-0d'
+  });
+
+  $("#search-submit").on("click", function(event){
+    event.preventDefault();
+
+    let startArr = $("#inputStartDate").val().split("-");
+    let endArr = $("#inputEndDate").val().split("-");
+
+    let start = "";
+    let end = "";
+
+    startArr.forEach(function(value, index, array){
+      start += value;
+    });
+
+    endArr.forEach(function(value, index, array){
+      end += value;
+    });
+
+    if( start === "" ){
+      window.alert("Please select Start Date!");
+      return
+    }
+
+    if( end === "" ){
+      window.alert("Please select End Date!");
+      return
+    }
+
+    if( (end - start) >= 0 ){
+      $("#searchForm").submit();
+    } else{
+      window.alert("EndDate cannot earlier than StartDate!");
+    }
+
+  });
+
+</script>

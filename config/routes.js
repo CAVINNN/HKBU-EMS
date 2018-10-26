@@ -12,18 +12,18 @@ module.exports.routes = {
 
   '/' : 'EventController.index',
 
-  '/detail' : 'EventController.detail',
+  'GET /detail/:id': 'EventController.detail',
 
   '/create' : 'EventController.create',
 
-  '/update' : 'EventController.update',
-
   '/admin' : 'EventController.admin',
 
-  '/search' : 'EventController.search'
+  'GET /update/:id': 'EventController.update',
+  'POST /update/:id': 'EventController.update',
 
-  // '/': {
-  //   view: 'pages/homepage'
-  // },
+  'GET /delete/:id': 'EventController.delete',
+  'POST /delete/:id': 'EventController.delete',
+
+  '/search' : 'EventController.search'
 
 };

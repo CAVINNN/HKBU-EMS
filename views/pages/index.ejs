@@ -1,74 +1,27 @@
 <div class="index">
+
   <div class="row">
 
-    <div class="col-md-6 highlight-item">
-      <div class="row">
-        <div class="col-md-12 highlight-item-title">
-          <h5>Singing Contest</h5>
+    <% events.forEach( function(event) { %>
+      <div class="col-md-6 highlight-item">
+        <div class="row">
+          <div class="col-md-12 highlight-item-title">
+            <h5><a href="/detail/<%= event.id %>"><%= event.eventName %></a></h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 highlight-item-img">
+            <img src="<%= event.imageURL %>" />
+          </div>
+          <div class="col-md-7 highlight-item-content">
+            <p><%= event.shortDesc %></p>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4 highlight-item-img">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539941826904&di=ca0d4fe10c5fded15c1a34a3569dccd4&imgtype=0&src=http%3A%2F%2Fm2.biz.itc.cn%2Fpic%2Fnew%2Fn%2F45%2F59%2FImg7375945_n.jpg" />
-        </div>
-        <div class="col-md-7 highlight-item-content">
-          <p>一年一度噶阿萨德热乎乎委托函然后她阿道夫三个条件和人家人员竟然也俺师傅和任务元件库可也</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 highlight-item">
-      <div class="row">
-        <div class="col-md-12 highlight-item-title">
-          <h5>Singing Contest</h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 highlight-item-img">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539941826904&di=ca0d4fe10c5fded15c1a34a3569dccd4&imgtype=0&src=http%3A%2F%2Fm2.biz.itc.cn%2Fpic%2Fnew%2Fn%2F45%2F59%2FImg7375945_n.jpg" />
-        </div>
-        <div class="col-md-7 highlight-item-content">
-          <p>asdgjkwhaergbkgjkrfgbafgjkasbkajkshdfusadhklajwgkajlwbrgkawbrklgbwrhfgbklwafasfhetherg</p>
-        </div>
-      </div>
-    </div>
+    <% }); %>
 
   </div>
-  <div class="row">
 
-    <div class="col-md-6 highlight-item">
-      <div class="row">
-        <div class="col-md-12 highlight-item-title">
-          <h5>Singing Contest</h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 highlight-item-img">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539941826904&di=ca0d4fe10c5fded15c1a34a3569dccd4&imgtype=0&src=http%3A%2F%2Fm2.biz.itc.cn%2Fpic%2Fnew%2Fn%2F45%2F59%2FImg7375945_n.jpg" />
-        </div>
-        <div class="col-md-7 highlight-item-content">
-          <p>一年一度噶阿萨德热乎乎委托函然后她阿道夫三个条件和人家人员竟然也俺师傅和任务元件库可也</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 highlight-item">
-      <div class="row">
-        <div class="col-md-12 highlight-item-title">
-          <h5>Singing Contest</h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 highlight-item-img">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539941826904&di=ca0d4fe10c5fded15c1a34a3569dccd4&imgtype=0&src=http%3A%2F%2Fm2.biz.itc.cn%2Fpic%2Fnew%2Fn%2F45%2F59%2FImg7375945_n.jpg" />
-        </div>
-        <div class="col-md-7 highlight-item-content">
-          <p>一年一度噶阿萨德热乎乎委托函然后她阿道夫三个条件和人家人员竟然也俺师傅和任务元件库可也</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </div>
 
 <style>

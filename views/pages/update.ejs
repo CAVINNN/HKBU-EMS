@@ -1,15 +1,15 @@
 <div class="update">
 
-  <form>
+  <form action="/update/<%= data.event.id %>" method="POST">
 
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputEventName">Event Name:</label>
-        <input type="text" class="form-control" id="inputEventName">
+        <input type="text" class="form-control" id="inputEventName" value="<%= data.event.eventName %>" name="Event[eventName]">
       </div>
       <div class="form-group col-md-6">
         <label for="inputImageURL">Image URL:</label>
-        <input type="text" class="form-control" id="inputImageURL">
+        <input type="text" class="form-control" id="inputImageURL" value="<%= data.event.imageURL %>" name="Event[imageURL]">
       </div>
     </div>
 
@@ -19,65 +19,72 @@
       <div class="form-group col-md-6">
         <div class="form-group">
           <label for="textareaShortDescription">Short Description:</label>
-          <textarea class="form-control" id="textareaShortDescription" rows="6"></textarea>
+          <textarea class="form-control" id="textareaShortDescription" rows="6" name="Event[shortDesc]"><%= data.event.shortDesc %></textarea>
         </div>
         <div class="form-group">
           <label for="textareaFullDescription">Full Description:</label>
-          <textarea class="form-control" id="textareaFullDescription" rows="8"></textarea>
+          <textarea class="form-control" id="textareaFullDescription" rows="8" name="Event[fullDesc]"><%= data.event.fullDesc %></textarea>
         </div>
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button class="btn btn-danger" id="update-delete">Delete</button>
       </div>
 
       <div class="form-group col-md-6">
 
         <div class="form-group">
           <label for="selectOrganizer">Organizer:</label>
-          <select class="form-control" id="selectOrganizer">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select class="form-control custom-select" id="selectOrganizer" name="Event[organizer]">
+            <% data.allOrganizers.forEach(function(organizer){ if( organizer == data.event.organizer ){ %>
+              <option selected><%= organizer %></option>
+              <% } else { %>
+              <option><%= organizer %></option>
+              <% } %>
+            <% }); %>
           </select>
         </div>
 
         <div class="form-group">
           <label for="inputEventDate">Event Date:</label>
-          <input type="text" class="form-control" id="inputEventDate">
+          <div class="input-eventDate date">
+            <input type="text" class="form-control" id="inputEventDate" value="<%= data.event.eventDate %>" name="Event[eventDate]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          </div>
         </div>
 
         <div class="form-group">
           <label for="inputTime">Time:</label>
-          <input type="text" class="form-control" id="inputTime">
+          <input type="text" class="form-control" id="inputTime" value="<%= data.event.time %>" name="Event[time]">
         </div>
 
         <div class="form-group">
           <label for="selectVenue">Venue:</label>
-          <select class="form-control" id="selectVenue">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select class="form-control custom-select" id="selectVenue" name="Event[venue]">
+            <% data.allVenue.forEach(function(venue){ if( venue == data.event.venue ){ %>
+                <option selected><%= venue %></option>
+              <% } else { %>
+                <option><%= venue %></option>
+              <% } %>
+            <% }); %>
           </select>
         </div>
 
         <div class="form-group">
           <label for="selectQuota">Quota:</label>
-          <select class="form-control" id="selectQuota">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select class="form-control custom-select" id="selectQuota" name="Event[quota]">
+            <% data.allQuota.forEach(function(quota){ if( quota == data.event.quota ){ %>
+                <option selected><%= quota %></option>
+              <% } else { %>
+                <option><%= quota %></option>
+              <% } %>
+            <% }); %>
           </select>
         </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="checkHighlighted">
-          <label class="form-check-label" for="checkHighlighted">
-            Highlighted Event
-          </label>
+        <div class="custom-control custom-checkbox">
+            <% if( data.event.isHighlight == true ) { %>
+                <input class="custom-control-input" type="checkbox" value="true" id="checkHighlighted" name="Event[isHighlight]" checked>
+            <% } else { %>
+                <input class="custom-control-input" type="checkbox" value="true" id="checkHighlighted" name="Event[isHighlight]">
+            <% } %>
+          <label class="custom-control-label" for="checkHighlighted">Highlighted Event</label>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -88,6 +95,8 @@
 
   </form>
 
+  <form action="/delete/<%= data.event.id %>" method="post" id="update-delete-form"></form>
+
 </div>
 
 <style>
@@ -95,3 +104,20 @@
     margin-top: 3%;
   }
 </style>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+  $('.form-group .input-eventDate.date').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-0d'
+  });
+
+  $("#update-delete").on("click", function (event) {
+    event.preventDefault();
+    let r = window.confirm("Do you want to delete this event?");
+    if( r === true ){
+      $("#update-delete-form").submit();
+    }
+  });
+</script>

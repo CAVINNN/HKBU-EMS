@@ -5,50 +5,58 @@
     <div class="col-md-12 detail-layout">
 
       <div class="row detail-title">
-        <h4>Singing Contest</h4>
+        <h4><%= event.eventName %></h4>
       </div>
 
       <div class="row">
 
         <div class="col-md-4 detail-img">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539941826904&di=ca0d4fe10c5fded15c1a34a3569dccd4&imgtype=0&src=http%3A%2F%2Fm2.biz.itc.cn%2Fpic%2Fnew%2Fn%2F45%2F59%2FImg7375945_n.jpg" />
+          <img src="<%= event.imageURL %>" />
         </div>
 
         <div class="col-md-8 detail-content-layout">
 
           <div class="row">
             <div class="col-md-12 detail-content-first">
-              <p>asdfgargawrgnaweirfghiaweurfhguiawghiuawhrfawuiguiaweguifgiawughiawerugwergsadfgawegheghsewfghawefghawefgawefgeawfg</p>
+              <p><%= event.fullDesc %></p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12 detail-content">
-              <p><b>Organizer:</b></p>
+              <p><b>Organizer:</b> <%= event.organizer %></p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12 detail-content">
-              <p><b>Date:</b></p>
+              <p><b>Date:</b> <%= event.eventDate %></p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12 detail-content">
-              <p><b>Time:</b></p>
+              <p><b>Time:</b> <%= event.time %></p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12 detail-content">
-              <p><b>Venue:</b></p>
+              <p><b>Venue:</b> <%= event.venue %></p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12 detail-content-last">
-              <p><b>Quota:</b></p>
+              <p><b>Quota:</b> <%= event.quota %></p>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="row">
+            <div class="col-md-12">
+              <a href="/update/<%= event.id %>"><button class="btn btn-primary">Update</button></a>
             </div>
           </div>
 
@@ -128,6 +136,5 @@
   .detail-content-first p{
     word-wrap: break-word;
   }
-
 
 </style>
