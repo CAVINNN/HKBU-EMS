@@ -45,7 +45,7 @@
         <div class="form-group">
           <label for="inputEventDate">Event Date:</label>
           <div class="input-eventDate date">
-            <input type="text" class="form-control" id="inputEventDate" value="<%= data.event.eventDate %>" name="Event[eventDate]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            <input type="text" class="form-control" id="inputEventDate" value="<%= data.event.eventDate.getFullYear() %>-<%= data.event.eventDate.getMonth() + 1 %>-<%= data.event.eventDate.getDate() %>" name="Event[eventDate]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
           </div>
         </div>
 

@@ -42,7 +42,9 @@ module.exports = {
       if (typeof req.body.Event === "undefined"){
         return res.badRequest("Form-data not received.");
       }
-      await Event.create(req.body.Event);
+      let event = req.body.Event;
+      event.eventDate = new Date(event.eventDate);
+      await Event.create(event);
       return res.ok("Successfully created!");
     }
     return res.badRequest("BadRequest!");
@@ -85,7 +87,7 @@ module.exports = {
         fullDesc: req.body.Event.fullDesc,
         imageURL: req.body.Event.imageURL,
         organizer: req.body.Event.organizer,
-        eventDate: req.body.Event.eventDate,
+        eventDate: new Date(req.body.Event.eventDate),
         time: req.body.Event.time,
         venue: req.body.Event.venue,
         quota: req.body.Event.quota,

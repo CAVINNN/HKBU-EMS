@@ -29,9 +29,14 @@ module.exports = {
       type: 'string'
     },
 
+    // eventDate: {
+    //   type: 'string',
+    //   columnType: 'date'
+    // },
+
     eventDate: {
-      type: 'string',
-      columnType: 'date'
+      type: 'ref',
+      columnType: 'datetime'
     },
 
     time: {
