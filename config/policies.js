@@ -29,7 +29,9 @@ module.exports.policies = {
 
     delete: 'isAdmin',
 
-    registered: 'isStudent'
+    registered: 'isStudent',
+
+    registration: 'isAdmin'
 
   },
 

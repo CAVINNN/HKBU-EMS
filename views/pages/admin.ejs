@@ -17,7 +17,7 @@
             <td align="center">
               <a href="/update/<%= event.id %>"><button class="btn btn-warning admin-button-first">Update</button></a>
               <form action="/delete/<%= event.id %>" method="POST" id="admin-delete-form-<%= event.id %>"><button class="btn btn-danger admin-button" onclick="disp_comfirm(event, <%= event.id %>)">Delete</button></form>
-              <button class="btn btn-info admin-button-last">Registration</button>
+              <a href="/registration/<%= event.id %>"><button class="btn btn-info admin-button-last">Registration</button></a>
             </td>
           </tr>
         <% }); %>

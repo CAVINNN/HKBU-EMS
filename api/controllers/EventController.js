@@ -26,6 +26,12 @@ module.exports = {
 
   },
 
+  // registration
+  registration: async function (req, res) {
+    let event = await Event.findOne({ id: req.params.id }).populate("registeredFor");
+    return res.view('pages/registration', {event: event});
+  },
+
   // detail
   detail: async function (req, res) {
 

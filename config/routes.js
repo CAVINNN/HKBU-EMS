@@ -17,6 +17,8 @@ module.exports.routes = {
 
   '/registered' : 'EventController.registered',
 
+  '/registration/:id' : 'EventController.registration',
+
   'GET /detail/:id': 'EventController.detail',
 
   '/create' : 'EventController.create',
