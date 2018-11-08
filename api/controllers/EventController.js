@@ -40,19 +40,15 @@ module.exports = {
     event.isRegistered = false;
 
     if ( req.session.role === "student" ){
-
       let user = await User.findOne({ username: req.session.username }).populate("register", {
         where: {
           id: req.params.id
         }
       });
-
       if( user.register.length !== 0 ){
         event.isRegistered = true;
       }
-
       return res.view('pages/detail', { event: event });
-
     } else {
       return res.view('pages/detail', { event: event });
     }

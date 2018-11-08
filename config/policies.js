@@ -31,6 +31,14 @@ module.exports.policies = {
 
     registered: 'isStudent'
 
+  },
+
+  UserController: {
+
+    register: 'isStudent',
+
+    cancel: 'isStudent'
+
   }
 
 };

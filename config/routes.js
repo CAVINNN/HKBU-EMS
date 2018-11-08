@@ -37,6 +37,10 @@ module.exports.routes = {
 
   '/login' : 'UserController.login',
 
-  '/logout' : 'UserController.logout'
+  '/logout' : 'UserController.logout',
+
+  'POST /register/:id' : 'UserController.register',
+
+  'POST /cancel/:id' : 'UserController.cancel'
 
 };

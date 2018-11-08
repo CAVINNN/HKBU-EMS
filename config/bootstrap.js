@@ -46,6 +46,18 @@ module.exports.bootstrap = async function(done) {
   await User.addToCollection(hxy.id, 'register').members([programming.id, dance.id]);
   await User.addToCollection(jsy.id, 'register').members(speech.id);
 
+  await Event.update(programming.id).set({
+    quota: (programming.quota - 1)
+  }).fetch();
+
+  await Event.update(dance.id).set({
+    quota: (dance.quota - 1)
+  }).fetch();
+
+  await Event.update(speech.id).set({
+    quota: (speech.quota - 1)
+  }).fetch();
+
   return done();
 
 };

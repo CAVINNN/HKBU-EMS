@@ -64,13 +64,13 @@
 
             <% if ( req.session.role === "student" && event.isRegistered === true ) { %>
               <div class="col-md-2">
-                <a href=""><button class="btn btn-danger">Cancel</button></a>
+                <form action="/cancel/<%= event.id %>" method="post" class="detail-submit-form"><button class="btn btn-danger">Cancel</button></form>
               </div>
             <% } %>
 
             <% if ( req.session.role === "student" && event.isRegistered === false ) { %>
               <div class="col-md-2">
-                <a href=""><button class="btn btn-primary">Register</button></a>
+                <form action="/register/<%= event.id %>" method="post" class="detail-submit-form"><button class="btn btn-primary">Register</button></form>
               </div>
             <% } %>
 
@@ -151,6 +151,10 @@
 
   .detail-content-first p{
     word-wrap: break-word;
+  }
+
+  .detail-submit-form{
+    display: inline;
   }
 
 </style>

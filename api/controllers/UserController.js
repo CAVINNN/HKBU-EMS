@@ -71,5 +71,53 @@ module.exports = {
     });
   },
 
+  // register
+  register: async function (req, res) {
+    if ( req.method === "GET" ) {
+      return res.forbidden();
+    } else {
+      let event = await Event.findOne(req.params.id);
+      if ( event.quota > 0 ){
+        let user = await User.findOne({ username: req.session.username }).populate("register", {
+          where: {
+            id: req.params.id
+          }
+        });
+        if ( user.register.length === 0 ){
+          await User.addToCollection(req.session.userid, 'register').members(req.params.id);
+          await Event.update(req.params.id).set({
+            quota: (event.quota - 1)
+          }).fetch();
+          return res.ok("register successfully");
+        } else {
+          return res.badRequest("You have already register this event!");
+        }
+      } else {
+        return res.badRequest("quota is full!");
+      }
+    }
+  },
+
+  // cancel
+  cancel: async function (req, res) {
+
+    if ( req.method === "GET" ) {
+      return res.forbidden();
+    } else {
+
+      await User.removeFromCollection(req.session.userid, 'register').members(req.params.id);
+
+      let event = await Event.findOne(req.params.id);
+
+      await Event.update(req.params.id).set({
+        quota: (event.quota + 1)
+      }).fetch();
+
+      return res.ok('Operation completed.');
+
+    }
+
+  }
+
 };
 
