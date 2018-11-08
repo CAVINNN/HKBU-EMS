@@ -27,7 +27,9 @@ module.exports.policies = {
 
     update: 'isAdmin',
 
-    delete: 'isAdmin'
+    delete: 'isAdmin',
+
+    registered: 'isStudent'
 
   }
 

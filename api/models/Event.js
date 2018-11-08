@@ -29,11 +29,6 @@ module.exports = {
       type: 'string'
     },
 
-    // eventDate: {
-    //   type: 'string',
-    //   columnType: 'date'
-    // },
-
     eventDate: {
       type: 'ref',
       columnType: 'datetime'
@@ -53,7 +48,17 @@ module.exports = {
 
     isHighlight: {
       type: 'boolean'
-    }
+    },
+
+    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
+    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
+    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
+    registeredFor: {
+      collection: 'User',
+      via: 'register'
+    },
+
 
   },
 

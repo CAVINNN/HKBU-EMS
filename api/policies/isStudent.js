@@ -1,6 +1,6 @@
 module.exports = async function (req, res, proceed) {
 
-  if (req.session.role === "admin" || req.session.role === "student") {
+  if ( req.session.role === "student") {
     return proceed();   //proceed to the next policy,
   }
 

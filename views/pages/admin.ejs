@@ -3,13 +3,21 @@
     <div class="col-md-12">
       <table class="table table-striped admin-table">
         <tbody>
+          <tr>
+            <th>ID</th>
+            <th>Event</th>
+            <th>Organizer</th>
+            <th></th>
+          </tr>
         <% events.forEach(function(event) { %>
           <tr>
-            <th><%= event.id %></th>
-            <td><a href="/detail/<%= event.id %>"><%= event.eventName %></a></td>
-            <td>
-              <a href="/update/<%= event.id %>"><button class="btn btn-primary">Update</button></a>
-              <form action="/delete/<%= event.id %>" method="POST" id="admin-delete-form-<%= event.id %>"><button class="btn btn-danger" onclick="disp_comfirm(event, <%= event.id %>)">Delete</button></form>
+            <td><%= event.id %></td>
+            <td class="admin-eventName"><a href="/detail/<%= event.id %>"><%= event.eventName %></a></td>
+            <td><%= event.organizer %></td>
+            <td align="center">
+              <a href="/update/<%= event.id %>"><button class="btn btn-warning admin-button-first">Update</button></a>
+              <form action="/delete/<%= event.id %>" method="POST" id="admin-delete-form-<%= event.id %>"><button class="btn btn-danger admin-button" onclick="disp_comfirm(event, <%= event.id %>)">Delete</button></form>
+              <button class="btn btn-info admin-button-last">Registration</button>
             </td>
           </tr>
         <% }); %>
@@ -25,13 +33,21 @@
     margin-top: 3%;
   }
 
-  .admin-table tbody tr td{
+  .admin-table tbody tr td.admin-eventName{
     font-weight: bold;
     color: #3e73ff;
   }
 
   form {
     display: inline;
+  }
+
+  .admin-button{
+    margin-left: 10px;
+  }
+
+  .admin-button-last{
+    margin-left: 10px;
   }
 
 </style>

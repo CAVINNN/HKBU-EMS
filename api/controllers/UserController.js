@@ -29,6 +29,8 @@ module.exports = {
 
     var user = await User.findOne({ username: req.body.username });
 
+    sails.log(user.id);
+
     if (!user) {
       res.status(401);
       return res.send("User not found");
@@ -46,7 +48,7 @@ module.exports = {
       if (err) return res.serverError(err);
 
       req.session.role = user.role;
-      req.session.id = user.id;
+      req.session.userid = user.id;
       req.session.username = user.username;
 
       sails.log("Session: " + JSON.stringify(req.session));

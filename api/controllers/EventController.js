@@ -20,7 +20,10 @@ module.exports = {
   // registered
   registered: async function (req, res) {
 
-    return res.view('pages/registered');
+    const registered = await User.findOne({ username: req.session.username }).populate("register");
+    sails.log(registered.register);
+
+    return res.view('pages/registered', { registeredArr : registered.register });
 
   },
 

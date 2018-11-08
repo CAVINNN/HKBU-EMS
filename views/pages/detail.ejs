@@ -55,9 +55,19 @@
           <br>
 
           <div class="row">
-            <div class="col-md-12">
-              <a href="/update/<%= event.id %>"><button class="btn btn-primary">Update</button></a>
-            </div>
+
+            <% if ( req.session.role === "admin" ) { %>
+              <div class="col-md-2">
+                <a href="/update/<%= event.id %>"><button class="btn btn-primary">Update</button></a>
+              </div>
+            <% } %>
+
+            <% if ( req.session.role === "student" ) { %>
+              <div class="col-md-2">
+                <a href=""><button class="btn btn-primary">Register</button></a>
+              </div>
+            <% } %>
+
           </div>
 
         </div>

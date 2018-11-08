@@ -29,9 +29,22 @@ module.exports.bootstrap = async function(done) {
 
   await User.createEach([
     { username: "hjw", password: hash, role: "admin" },
-    { username: "hxy", password: hash, role: "student" }
+    { username: "hxy", password: hash, role: "student" },
+    { username: "jsy", password: hash, role: "student" },
     // etc.
   ]);
+
+  // user
+  const hxy = await User.findOne({ username: "hxy" });
+  const jsy = await User.findOne({ username: "jsy" });
+
+  // event
+  const programming = await Event.findOne({ eventName: "Extreme Programming" });
+  const dance = await Event.findOne({ eventName: "Dance Dance" });
+  const speech = await Event.findOne({ eventName: "English Speech" });
+
+  await User.addToCollection(hxy.id, 'register').members([programming.id, dance.id]);
+  await User.addToCollection(jsy.id, 'register').members(speech.id);
 
   return done();
 

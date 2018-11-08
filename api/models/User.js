@@ -38,10 +38,10 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    // supervises: {
-    //   collection: 'Event',
-    //   via: 'worksFor'
-    // },
+    register: {
+      collection: 'Event',
+      via: 'registeredFor'
+    },
 
   },
 
