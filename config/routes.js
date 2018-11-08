@@ -10,7 +10,12 @@
 
 module.exports.routes = {
 
+
+  // EventController
+
   '/' : 'EventController.index',
+
+  '/registered' : 'EventController.registered',
 
   'GET /detail/:id': 'EventController.detail',
 
@@ -24,6 +29,14 @@ module.exports.routes = {
   'GET /delete/:id': 'EventController.delete',
   'POST /delete/:id': 'EventController.delete',
 
-  '/search' : 'EventController.search'
+  '/search' : 'EventController.search',
+
+
+
+  // UserController
+
+  '/login' : 'UserController.login',
+
+  '/logout' : 'UserController.logout'
 
 };

@@ -17,6 +17,13 @@ module.exports = {
     return res.view('pages/index', { events: highlightedEvents });
   },
 
+  // registered
+  registered: async function (req, res) {
+
+    return res.view('pages/registered');
+
+  },
+
   // detail
   detail: async function (req, res) {
     let message = Event.getInvalidIdMsg(req.params);

@@ -11,6 +11,8 @@
 
 module.exports.bootstrap = async function(done) {
 
+  sails.bcryptjs = require('bcryptjs');
+
   if (await Event.count() > 0) {
     return done();
   }
@@ -21,6 +23,14 @@ module.exports.bootstrap = async function(done) {
     {eventName:"Festival Talk",shortDesc:"Are you interested in the birth of the festival? Do you want to know more about the formation and development of the festival? Join us and you will get the knowledge you want!",fullDesc:"Are you interested in the birth of the festival? Do you want to know more about the formation and development of the festival? Join us and you will get the knowledge you want! XDDDDDDDDDDDDDDDDD!",imageURL:"http://www.roseonly.com.cn/upload/mobile_index_image/20160707/1467862040145036687.jpg",organizer:"Culture and History Studies",eventDate: new Date('2018/12/03'),time:"09:00 - 11:00",venue:"SWT 505",quota:50,isHighlight:false},
     {eventName:"Political system seminar",shortDesc:"On today's planet, all countries follow their own political system. Do you want to know the political system in different countries? Do you want to know the strengths and weaknesses of different political systems? Join our seminar and you can learn a lot!",fullDesc:"On today's planet, all countries follow their own political system. Do you want to know the political system in different countries? Do you want to know the strengths and weaknesses of different political systems? Join our seminar and you can learn a lot! We are waiting for you here!!!",imageURL:"https://en.idi.org.il/media/4222/reforming_israel-s_political_system_cover.jpg",organizer:"Government and International Studies",eventDate: new Date('2018/12/11'),time:"12:00 - 15:00",venue:"SWT 603",quota:200,isHighlight:true},
     {eventName:"English Speech",shortDesc:"Come to the English Speech activity! Make your English speaking and listening better and better! There are a lot of fun here!",fullDesc:"Come to the English Speech activity! Make your English speaking and listening better and better! There are a lot of fun here! You can join in this activity by internet.",imageURL:"http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/7/7pdvv65l9w0jeb7.jpg",organizer:"Art and Performance Studies",eventDate: new Date('2018/12/16'),time:"19:00 - 20:00",venue:"SWT 501",quota:80,isHighlight:true}
+  ]);
+
+  const hash = await sails.bcryptjs.hash('123456', 10);
+
+  await User.createEach([
+    { username: "hjw", password: hash, role: "admin" },
+    { username: "hxy", password: hash, role: "student" }
+    // etc.
   ]);
 
   return done();
