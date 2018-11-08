@@ -21,7 +21,6 @@ module.exports = {
   registered: async function (req, res) {
 
     const registered = await User.findOne({ username: req.session.username }).populate("register");
-    sails.log(registered.register);
 
     return res.view('pages/registered', { registeredArr : registered.register });
 
@@ -29,6 +28,7 @@ module.exports = {
 
   // detail
   detail: async function (req, res) {
+
     let message = Event.getInvalidIdMsg(req.params);
     if (message){
       return res.badRequest(message);
@@ -37,7 +37,26 @@ module.exports = {
     if (!event){
       return res.notFound();
     }
-    return res.view('pages/detail', { event: event });
+    event.isRegistered = false;
+
+    if ( req.session.role === "student" ){
+
+      let user = await User.findOne({ username: req.session.username }).populate("register", {
+        where: {
+          id: req.params.id
+        }
+      });
+
+      if( user.register.length !== 0 ){
+        event.isRegistered = true;
+      }
+
+      return res.view('pages/detail', { event: event });
+
+    } else {
+      return res.view('pages/detail', { event: event });
+    }
+
   },
 
   // create

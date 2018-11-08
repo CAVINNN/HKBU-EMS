@@ -62,7 +62,13 @@
               </div>
             <% } %>
 
-            <% if ( req.session.role === "student" ) { %>
+            <% if ( req.session.role === "student" && event.isRegistered === true ) { %>
+              <div class="col-md-2">
+                <a href=""><button class="btn btn-danger">Cancel</button></a>
+              </div>
+            <% } %>
+
+            <% if ( req.session.role === "student" && event.isRegistered === false ) { %>
               <div class="col-md-2">
                 <a href=""><button class="btn btn-primary">Register</button></a>
               </div>

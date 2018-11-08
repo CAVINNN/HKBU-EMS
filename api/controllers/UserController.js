@@ -29,8 +29,6 @@ module.exports = {
 
     var user = await User.findOne({ username: req.body.username });
 
-    sails.log(user.id);
-
     if (!user) {
       res.status(401);
       return res.send("User not found");
