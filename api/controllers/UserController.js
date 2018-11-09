@@ -53,7 +53,11 @@ module.exports = {
 
       // return res.json(req.session);
 
-      return res.ok("Login successfully");
+      if (req.wantsJSON){
+        return res.redirect('/');
+      } else {
+        return res.ok("Login successfully");
+      }
 
     });
 
@@ -62,13 +66,25 @@ module.exports = {
   // logout
   logout: async function (req, res) {
 
-    req.session.destroy(function (err) {
+    if( req.method === "GET" ){
 
-      if (err) return res.serverError(err);
+      return res.forbidden();
 
-      return res.ok("Log out successfully");
+    } else {
 
-    });
+      req.session.destroy(function (err) {
+
+        if (err) return res.serverError(err);
+
+        if (req.wantsJSON){
+          return res.redirect('/');
+        } else {
+          return res.ok("Logout successfully");
+        }
+
+      });
+
+    }
   },
 
   // register

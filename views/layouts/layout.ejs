@@ -105,11 +105,11 @@
           <% } %>
 
           <% if ( req.session.role == "admin") { %>
-            <p>Hi, <%= req.session.username %>. ( <a href="/logout">Logout</a> )</p>
+            <p>Hi, <%= req.session.username %>. ( <a href="javascript:submitLogout();">Logout</a> )</p>
           <% } %>
 
           <% if ( req.session.role == "student") { %>
-            <p>Hi, <%= req.session.username %>. ( <a href="/logout">Logout</a> )</p>
+            <p>Hi, <%= req.session.username %>. ( <a href="javascript:submitLogout();">Logout</a> )</p>
           <% } %>
 
         </div>
@@ -135,15 +135,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript">
-      if( window.location.href === "http://localhost:1337/search" ){
+
+      if( window.location.pathname === "/search" ){
         $(".nav-search").css("color", "rgba(0,0,0,1)");
       }
-      if( window.location.href === "http://localhost:1337/create" ){
+      if( window.location.pathname === "/create" ){
         $(".nav-create").css("color", "rgba(0,0,0,1)");
       }
-      if( window.location.href === "http://localhost:1337/admin" ){
+      if( window.location.pathname === "/admin" ){
         $(".nav-admin").css("color", "rgba(0,0,0,1)");
       }
+
+      async function submitLogout() {
+
+        let response = await fetch('/logout', {
+          method: 'post',
+          credentials: 'same-origin'
+        });
+
+        if (response.redirected) {
+          window.location = response.url;
+          window.alert("Logout successfully");
+        } else {
+          let message = await response.text();
+          alert(message);
+        }
+
+      }
+
     </script>
   </body>
 </html>
