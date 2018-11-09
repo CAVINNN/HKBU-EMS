@@ -64,13 +64,13 @@
 
             <% if ( req.session.role === "student" && event.isRegistered === true ) { %>
               <div class="col-md-2">
-                <form action="/cancel/<%= event.id %>" method="post" class="detail-submit-form"><button class="btn btn-danger">Cancel</button></form>
+                <button class="btn btn-danger" onclick="submitCancel(event)">Cancel</button>
               </div>
             <% } %>
 
             <% if ( req.session.role === "student" && event.isRegistered === false ) { %>
               <div class="col-md-2">
-                <form action="/register/<%= event.id %>" method="post" class="detail-submit-form"><button class="btn btn-primary">Register</button></form>
+                <button class="btn btn-primary" onclick="submitRegister(event)">Register</button>
               </div>
             <% } %>
 
@@ -158,3 +158,54 @@
   }
 
 </style>
+
+<script>
+
+  async function submitRegister(event) {
+
+    event.preventDefault();
+    let r = window.confirm("Do you want to register this event?");
+    if( r === true ){
+
+      let response = await fetch('/register/<%= event.id %>' , {
+        method: 'POST',
+        credentials: 'same-origin'
+      });
+
+      if (response.redirected) {
+        window.location = response.url;
+        window.alert("Register successfully");
+      } else {
+        let message = await response.text();
+        window.alert(message);
+      }
+
+    }
+
+  }
+
+
+  async function submitCancel(event) {
+
+    event.preventDefault();
+    let r = window.confirm("Do you want to cancel this event?");
+    if( r === true ){
+
+      let response = await fetch('/cancel/<%= event.id %>' , {
+        method: 'DELETE',
+        credentials: 'same-origin'
+      });
+
+      if (response.redirected) {
+        window.location = response.url;
+        window.alert("Cancel successfully");
+      } else {
+        let message = await response.text();
+        window.alert(message);
+      }
+
+    }
+
+  }
+
+</script>

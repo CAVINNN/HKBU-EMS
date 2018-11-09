@@ -13,36 +13,37 @@ module.exports.routes = {
 
   // EventController
 
-  '/' : 'EventController.index',
+  'GET /' : 'EventController.index',
 
-  '/registered' : 'EventController.registered',
+  'GET /registered' : 'EventController.registered',
 
-  '/registration/:id' : 'EventController.registration',
+  'GET /registration/:id' : 'EventController.registration',
 
   'GET /detail/:id': 'EventController.detail',
 
-  '/create' : 'EventController.create',
+  'GET /create' : 'EventController.create',
+  'POST /create' : 'EventController.create',
 
-  '/admin' : 'EventController.admin',
+  'GET /admin' : 'EventController.admin',
 
   'GET /update/:id': 'EventController.update',
-  'POST /update/:id': 'EventController.update',
+  'PUT /update/:id': 'EventController.update',
 
   'GET /delete/:id': 'EventController.delete',
-  'POST /delete/:id': 'EventController.delete',
+  'DELETE /delete/:id': 'EventController.delete',
 
-  '/search' : 'EventController.search',
-
+  'GET /search' : 'EventController.search',
 
 
   // UserController
 
-  '/login' : 'UserController.login',
+  'GET /login' : 'UserController.login',
+  'POST /login' : 'UserController.login',
 
-  '/logout' : 'UserController.logout',
+  'POST /logout' : 'UserController.logout',
 
   'POST /register/:id' : 'UserController.register',
 
-  'POST /cancel/:id' : 'UserController.cancel'
+  'DELETE /cancel/:id' : 'UserController.cancel'
 
 };

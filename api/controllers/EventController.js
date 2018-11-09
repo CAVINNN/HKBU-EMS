@@ -93,7 +93,7 @@ module.exports = {
     if (message) {
       return res.badRequest(message);
     }
-    if (req.method == "GET") {
+    if (req.method === "GET") {
       let event = await Event.findOne(req.params.id);
       if (!event) {
         return res.notFound();
@@ -105,35 +105,39 @@ module.exports = {
       data.event = event;
       return res.view('pages/update', { data: data });
     } else {
-      if (typeof req.body.Event === "undefined") {
+      if (typeof req.body === "undefined") {
         return res.badRequest("Form-data not received.");
       }
       let isHighLighted = false;
-      if (typeof req.body.Event.isHighlight !== "undefined") {
+      if (typeof req.body.isHighlight !== "undefined") {
         isHighLighted = true;
       }
       let models = await Event.update(req.params.id).set({
-        eventName: req.body.Event.eventName,
-        shortDesc: req.body.Event.shortDesc,
-        fullDesc: req.body.Event.fullDesc,
-        imageURL: req.body.Event.imageURL,
-        organizer: req.body.Event.organizer,
-        eventDate: new Date(req.body.Event.eventDate),
-        time: req.body.Event.time,
-        venue: req.body.Event.venue,
-        quota: req.body.Event.quota,
+        eventName: req.body.eventName,
+        shortDesc: req.body.shortDesc,
+        fullDesc: req.body.fullDesc,
+        imageURL: req.body.imageURL,
+        organizer: req.body.organizer,
+        eventDate: new Date(req.body.eventDate),
+        time: req.body.time,
+        venue: req.body.venue,
+        quota: req.body.quota,
         isHighlight: isHighLighted
       }).fetch();
-      if (models.length == 0) {
-        return res.notFound();
+
+
+      if (req.wantsJSON){
+        return res.redirect('/detail/' + req.params.id);
+      } else {
+        return res.ok("Login successfully");
       }
-      return res.ok("Record updated");
+
     }
   },
 
   // delete
   delete: async function (req, res) {
-    if (req.method == "GET") {
+    if (req.method === "GET") {
       return res.forbidden();
     }
     let message = Event.getInvalidIdMsg(req.params);
@@ -144,7 +148,11 @@ module.exports = {
     if (models.length == 0) {
       return res.notFound();
     }
-    return res.ok("Event Deleted.");
+    if (req.wantsJSON){
+      return res.redirect('/admin');
+    } else {
+      return res.ok("Delete successfully");
+    }
   },
 
   // search

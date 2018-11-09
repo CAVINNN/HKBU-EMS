@@ -104,7 +104,11 @@ module.exports = {
           await Event.update(req.params.id).set({
             quota: (event.quota - 1)
           }).fetch();
-          return res.ok("register successfully");
+          if (req.wantsJSON){
+            return res.redirect('/registered');
+          } else {
+            return res.ok("Register successfully");
+          }
         } else {
           return res.badRequest("You have already register this event!");
         }
@@ -129,7 +133,11 @@ module.exports = {
         quota: (event.quota + 1)
       }).fetch();
 
-      return res.ok('Operation completed.');
+      if (req.wantsJSON){
+        return res.redirect('/registered');
+      } else {
+        return res.ok("Cancel successfully");
+      }
 
     }
 

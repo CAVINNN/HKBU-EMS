@@ -1,15 +1,15 @@
 <div class="update">
 
-  <form action="/update/<%= data.event.id %>" method="POST">
+  <form action="/update/<%= data.event.id %>" onsubmit="submitUpdate(this);return false">
 
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputEventName">Event Name:</label>
-        <input type="text" class="form-control" id="inputEventName" value="<%= data.event.eventName %>" name="Event[eventName]">
+        <input type="text" class="form-control" id="inputEventName" value="<%= data.event.eventName %>" name="eventName">
       </div>
       <div class="form-group col-md-6">
         <label for="inputImageURL">Image URL:</label>
-        <input type="text" class="form-control" id="inputImageURL" value="<%= data.event.imageURL %>" name="Event[imageURL]">
+        <input type="text" class="form-control" id="inputImageURL" value="<%= data.event.imageURL %>" name="imageURL">
       </div>
     </div>
 
@@ -19,20 +19,20 @@
       <div class="form-group col-md-6">
         <div class="form-group">
           <label for="textareaShortDescription">Short Description:</label>
-          <textarea class="form-control" id="textareaShortDescription" rows="6" name="Event[shortDesc]"><%= data.event.shortDesc %></textarea>
+          <textarea class="form-control" id="textareaShortDescription" rows="6" name="shortDesc"><%= data.event.shortDesc %></textarea>
         </div>
         <div class="form-group">
           <label for="textareaFullDescription">Full Description:</label>
-          <textarea class="form-control" id="textareaFullDescription" rows="8" name="Event[fullDesc]"><%= data.event.fullDesc %></textarea>
+          <textarea class="form-control" id="textareaFullDescription" rows="8" name="fullDesc"><%= data.event.fullDesc %></textarea>
         </div>
-        <button class="btn btn-danger" id="update-delete">Delete</button>
+        <button class="btn btn-danger" onclick="submitDelete(event)">Delete</button>
       </div>
 
       <div class="form-group col-md-6">
 
         <div class="form-group">
           <label for="selectOrganizer">Organizer:</label>
-          <select class="form-control custom-select" id="selectOrganizer" name="Event[organizer]">
+          <select class="form-control custom-select" id="selectOrganizer" name="organizer">
             <% data.allOrganizers.forEach(function(organizer){ if( organizer == data.event.organizer ){ %>
               <option selected><%= organizer %></option>
               <% } else { %>
@@ -45,18 +45,18 @@
         <div class="form-group">
           <label for="inputEventDate">Event Date:</label>
           <div class="input-eventDate date">
-            <input type="text" class="form-control" id="inputEventDate" value="<%= data.event.eventDate.getFullYear() %>-<%= data.event.eventDate.getMonth() + 1 %>-<%= data.event.eventDate.getDate() %>" name="Event[eventDate]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            <input type="text" class="form-control" id="inputEventDate" value="<%= data.event.eventDate.getFullYear() %>-<%= data.event.eventDate.getMonth() + 1 %>-<%= data.event.eventDate.getDate() %>" name="eventDate"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
           </div>
         </div>
 
         <div class="form-group">
           <label for="inputTime">Time:</label>
-          <input type="text" class="form-control" id="inputTime" value="<%= data.event.time %>" name="Event[time]">
+          <input type="text" class="form-control" id="inputTime" value="<%= data.event.time %>" name="time">
         </div>
 
         <div class="form-group">
           <label for="selectVenue">Venue:</label>
-          <select class="form-control custom-select" id="selectVenue" name="Event[venue]">
+          <select class="form-control custom-select" id="selectVenue" name="venue">
             <% data.allVenue.forEach(function(venue){ if( venue == data.event.venue ){ %>
                 <option selected><%= venue %></option>
               <% } else { %>
@@ -68,7 +68,7 @@
 
         <div class="form-group">
           <label for="selectQuota">Quota:</label>
-          <select class="form-control custom-select" id="selectQuota" name="Event[quota]">
+          <select class="form-control custom-select" id="selectQuota" name="quota">
             <% data.allQuota.forEach(function(quota){ if( quota == data.event.quota ){ %>
                 <option selected><%= quota %></option>
               <% } else { %>
@@ -80,9 +80,9 @@
 
         <div class="custom-control custom-checkbox">
             <% if( data.event.isHighlight == true ) { %>
-                <input class="custom-control-input" type="checkbox" value="true" id="checkHighlighted" name="Event[isHighlight]" checked>
+                <input class="custom-control-input" type="checkbox" value="true" id="checkHighlighted" name="isHighlight" checked>
             <% } else { %>
-                <input class="custom-control-input" type="checkbox" value="true" id="checkHighlighted" name="Event[isHighlight]">
+                <input class="custom-control-input" type="checkbox" value="true" id="checkHighlighted" name="isHighlight">
             <% } %>
           <label class="custom-control-label" for="checkHighlighted">Highlighted Event</label>
         </div>
@@ -95,7 +95,7 @@
 
   </form>
 
-  <form action="/delete/<%= data.event.id %>" method="post" id="update-delete-form"></form>
+  <!--<form action="/delete/<%= data.event.id %>" method="post" id="update-delete-form"></form>-->
 
 </div>
 
@@ -113,11 +113,45 @@
     startDate: '-0d'
   });
 
-  $("#update-delete").on("click", function (event) {
+  async function submitUpdate(oFormElement) {
+
+    let response = await fetch(oFormElement.action, {
+      method: 'PUT',
+      credentials: 'same-origin',
+      body: new FormData(oFormElement),
+    });
+
+    if (response.redirected) {
+      window.location = response.url;
+      window.alert("Update successfully");
+    } else {
+      let message = await response.text();
+      window.alert(message);
+    }
+
+  }
+
+  async function submitDelete(event) {
+
     event.preventDefault();
     let r = window.confirm("Do you want to delete this event?");
     if( r === true ){
-      $("#update-delete-form").submit();
+
+      let response = await fetch('/delete/<%= data.event.id %>', {
+        method: 'DELETE',
+        credentials: 'same-origin'
+      });
+
+      if (response.redirected) {
+        window.location = response.url;
+        window.alert("Delete successfully");
+      } else {
+        let message = await response.text();
+        window.alert(message);
+      }
+
     }
-  });
+
+  }
+
 </script>
