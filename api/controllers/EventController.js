@@ -14,7 +14,13 @@ module.exports = {
       let deleteItem = highlightedEvents.length - 4;
       highlightedEvents.splice(0, deleteItem);
     }
-    return res.view('pages/index', { events: highlightedEvents });
+
+    if (req.wantsJSON){
+      return res.json({ starEvents : highlightedEvents });
+    } else {
+      return res.view('pages/index', { events: highlightedEvents });
+    }
+
   },
 
   // registered
@@ -22,7 +28,11 @@ module.exports = {
 
     const registered = await User.findOne({ username: req.session.username }).populate("register");
 
-    return res.view('pages/registered', { registeredArr : registered.register });
+    if (req.wantsJSON){
+      return res.json({ registeredEvents : registered.register });
+    } else {
+      return res.view('pages/registered', { registeredArr : registered.register });
+    }
 
   },
 
@@ -46,6 +56,7 @@ module.exports = {
     event.isRegistered = false;
 
     if ( req.session.role === "student" ){
+
       let user = await User.findOne({ username: req.session.username }).populate("register", {
         where: {
           id: req.params.id
@@ -54,9 +65,20 @@ module.exports = {
       if( user.register.length !== 0 ){
         event.isRegistered = true;
       }
-      return res.view('pages/detail', { event: event });
+
+      if (req.wantsJSON){
+        return res.json({ event: event });
+      } else {
+        return res.view('pages/detail', { event: event });
+      }
     } else {
-      return res.view('pages/detail', { event: event });
+
+      if (req.wantsJSON){
+        return res.json({ event: event });
+      } else {
+        return res.view('pages/detail', { event: event });
+      }
+
     }
 
   },
@@ -204,6 +226,22 @@ module.exports = {
     }
 
   },
+
+  // getEventsByOrgan
+  getEventsByOrgan: async function (req, res) {
+    let events = await Event.find({
+      organizer: req.params.organizer
+    });
+    res.json({ events: events });
+  },
+
+  // getEventsByVenue
+  getEventsByVenue: async function (req, res) {
+    let events = await Event.find({
+      venue: req.params.venue
+    });
+    res.json({ events: events });
+  }
 
 };
 

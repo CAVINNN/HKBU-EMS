@@ -15,6 +15,8 @@ module.exports.routes = {
 
   'GET /' : 'EventController.index',
 
+  'GET /index' : 'EventController.index',
+
   'GET /registered' : 'EventController.registered',
 
   'GET /registration/:id' : 'EventController.registration',
@@ -34,6 +36,9 @@ module.exports.routes = {
 
   'GET /search' : 'EventController.search',
 
+  'GET /getEventsByOrgan/:organizer' : 'EventController.getEventsByOrgan',
+
+  'GET /getEventsByVenue/:venue' : 'EventController.getEventsByVenue',
 
   // UserController
 
@@ -44,6 +49,14 @@ module.exports.routes = {
 
   'POST /register/:id' : 'UserController.register',
 
-  'DELETE /cancel/:id' : 'UserController.cancel'
+  'DELETE /cancel/:id' : 'UserController.cancel',
+
+  'POST /mobileLogin' : 'UserController.mobileLogin',
+
+  'POST /mobileLogout' : 'UserController.mobileLogout',
+
+  'POST /mobileRegister/:id' : 'UserController.mobileRegister',
+
+  'DELETE /mobileCancel/:id' : 'UserController.mobileCancel'
 
 };

@@ -75,7 +75,7 @@ module.exports = {
   },
 
   getAllVenue: function() {
-    let allVenue = ["SWT 501", "SWT 502", "SWT 503", "SWT 504", "SWT 505", "SWT 601", "SWT 602", "SWT 603"];
+    let allVenue = ["SWT 501", "OEE", "WLB", "AC Hall", "OEM", "RRS638", "FSC901E", "AAB"];
     return allVenue;
   },
 
