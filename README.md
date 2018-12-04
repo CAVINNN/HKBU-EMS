@@ -17,6 +17,12 @@ a [Sails v1](https://sailsjs.com) application
 
 This app was originally generated on Wed Oct 17 2018 22:55:24 GMT+0800 (中国标准时间) using Sails v1.0.2.
 
+### User information
+
+(admin) username:Young password:123456
+(Student) username:Ethel password:123456
+(Student) username:Mike password:123456
+
 <!-- Internally, Sails used [`sails-generate@1.15.28`](https://github.com/balderdashy/sails-generate/tree/v1.15.28/lib/core-generators/new). -->
 
 
