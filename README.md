@@ -1,21 +1,4 @@
-# ems
-
-a [Sails v1](https://sailsjs.com) application
-
-
-### Links
-
-+ [Get started](https://sailsjs.com/get-started)
-+ [Sails framework documentation](https://sailsjs.com/documentation)
-+ [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
-+ [Deployment tips](https://sailsjs.com/documentation/concepts/deployment)
-+ [Community support options](https://sailsjs.com/support)
-+ [Professional / enterprise options](https://sailsjs.com/enterprise)
-
-
-### Version info
-
-This app was originally generated on Wed Oct 17 2018 22:55:24 GMT+0800 (中国标准时间) using Sails v1.0.2.
+# Event Management System
 
 ### User information
 
@@ -23,11 +6,68 @@ This app was originally generated on Wed Oct 17 2018 22:55:24 GMT+0800 (中国�
 (Student) username:Ethel password:123456
 (Student) username:Mike password:123456
 
-<!-- Internally, Sails used [`sails-generate@1.15.28`](https://github.com/balderdashy/sails-generate/tree/v1.15.28/lib/core-generators/new). -->
+
+
+* **Index - Visitor**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Index.png)  
 
 
 
-<!--
-Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
--->
+* **Detail - Visitor**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Detail.png)  
+
+
+
+* **Login - Visitor**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Login.png)  
+
+
+
+* **Index - Student**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/User_Index.png)  
+
+
+
+* **Search - Student**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Search.png)  
+
+
+
+* **Register Event - Student**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Register.png)  
+
+
+
+* **Registered Event - Student**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Registered_Event.png)  
+
+
+
+* **Cancel Event - Student**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Cancel.png)  
+
+
+
+* **Index - Admin**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Admin_Index.png)  
+
+
+
+* **Create Event - Admin**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Create.png)  
+
+
+
+* **Admin Event - Admin**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Admin.png)  
+
+
+
+* **Event Detail - Admin**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Admin_Detail.png)  
+
+
+
+* **Delete Event - Admin**
+  ![image](https://raw.githubusercontent.com/CAVINNN/HKBU-EMS/master/screenshots/Delete_Event.png)  
 
