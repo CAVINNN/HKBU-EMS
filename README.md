@@ -2,9 +2,9 @@
 
 ### User information
 
-(admin) username:Young password:123456
-(Student) username:Ethel password:123456
-(Student) username:Mike password:123456
+(admin) username:Young password:123456  
+(Student) username:Ethel password:123456  
+(Student) username:Mike password:123456  
 
 
 
